@@ -1,13 +1,16 @@
 import { AppDispatch } from '..';
 import axios from '../../axios';
+import { IAirport, IServerResp } from '../../models/models';
+import { AirportSlice } from '../slice/AirportSlice';
 
 export const fetchAirports = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      const resp = await axios.get('airports');
-      console.log(resp);
+      dispatch(AirportSlice.actions.fetching);
+      const resp = await axios.get<IServerResp<IAirport>>('airports');
+      dispatch(AirportSlice.actions.fetchSuccess(resp.data.results));
     } catch (e) {
-      fetch;
+      dispatch(AirportSlice.actions.fetchError(e as Error));
     }
   };
 };

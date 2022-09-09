@@ -13,7 +13,7 @@ const initialState: AirportState = {
   airports: [],
 };
 
-const arportSlice = createSlice({
+export const AirportSlice = createSlice({
   name: 'airport',
   initialState,
   reducers: {
@@ -31,4 +31,4 @@ const arportSlice = createSlice({
   },
 });
 
-export default arportSlice.reducer;
+export default AirportSlice.reducer;
