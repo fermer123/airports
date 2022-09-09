@@ -9,6 +9,7 @@ const MainPage = () => {
   const dispatch = useAppDispatch();
 
   const { airports, error, loading } = useAppSelector((state) => state.airport);
+  console.log(airports);
 
   useEffect(() => {
     dispatch(fetchAirports());
