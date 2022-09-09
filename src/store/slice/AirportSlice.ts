@@ -4,12 +4,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface AirportState {
   loading: boolean;
   error: string;
+  count: number;
   airports: IAirport[];
 }
 
 const initialState: AirportState = {
   loading: false,
   error: '',
+  count: 0,
   airports: [],
 };
 
