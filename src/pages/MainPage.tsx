@@ -6,21 +6,23 @@ import { useEffect, useState } from 'react';
 import { fetchAirports } from '../store/actions/airportAction';
 import ReactPaginate from 'react-paginate';
 
-const ITEMS_PER_PAGE = 50;
+const ITEMS_PER_PAGE = 10;
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const pageCount = 10;
-  const { airports, error, loading } = useAppSelector((state) => state.airport);
-  const [page] = useState(1);
-  const pageCount = 0;
+  const { airports, error, loading, count } = useAppSelector(
+    (state) => state.airport,
+  );
+  const [page, setPage] = useState(1);
+  const pageCount = Math.ceil(count / ITEMS_PER_PAGE);
+
   const pageChangeHandler = ({ selected }: { selected: number }) => {
-    //console.log(e);
+    setPage(selected);
   };
 
   useEffect(() => {
     dispatch(fetchAirports(page, ITEMS_PER_PAGE));
-  }, []);
+  }, [page, dispatch]);
 
   return (
     <div className='container mx-auto max-w-[900px] pt-5'>
@@ -43,7 +45,13 @@ const MainPage = () => {
         onPageChange={pageChangeHandler}
         pageRangeDisplayed={5}
         pageCount={pageCount}
+        forcePage={page - 1}
         previousLabel='<'
+        containerClassName='flex justify-center mb-2 '
+        pageClassName='py-1 px-2 border mr-2'
+        previousClassName='py-1 px-2 border mr-2'
+        nextClassName='py-1 px-2 border'
+        activeClassName='text-teal-600'
       />
     </div>
   );

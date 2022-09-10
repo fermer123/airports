@@ -13,7 +13,12 @@ export const fetchAirports = (page = 1, count = 50) => {
           count,
         },
       });
-      dispatch(AirportSlice.actions.fetchSuccess(resp.data.results));
+      dispatch(
+        AirportSlice.actions.fetchSuccess({
+          airports: resp.data.results,
+          count: resp.data.count,
+        }),
+      );
     } catch (e) {
       dispatch(AirportSlice.actions.fetchError(e as Error));
     }
