@@ -1,7 +1,14 @@
 import { useInput } from '../hooks/Input';
+import { useEffect } from 'react';
 
 const AirportSearch = () => {
   const input = useInput('');
+
+  useEffect(() => {
+    if (input.value.length > 3) {
+    }
+  }, [input.value]);
+
   return (
     <div className='mb-4 relative'>
       <input
