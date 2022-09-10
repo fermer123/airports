@@ -2,7 +2,7 @@ import AirportCard from '../components/AirportCard';
 import AirportFilter from '../components/AirportFilter';
 import AirportSearch from '../components/AirportSearch';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { fetchAirports } from '../store/actions/airportAction';
 import ReactPaginate from 'react-paginate';
 
