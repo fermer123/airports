@@ -1,13 +1,25 @@
 import { useInput } from '../hooks/Input';
 import { useEffect } from 'react';
 import useDebounce from '../hooks/debounce';
+import axios from '../axios';
+import { IAirport, IServerResp } from '../models/models';
 
 const AirportSearch = () => {
   const input = useInput('');
-  const debounce = useDebounce(input.value);
+  const debounce = useDebounce(input.value, 400);
+  const searchAirports = async () => {
+    const resp = await axios.get<IServerResp<IAirport>>(`/airports`, {
+      params: {
+        search: debounce,
+        count: 10,
+      },
+    });
+    console.log('debounce:', resp);
+  };
 
   useEffect(() => {
     if (debounce.length > 3) {
+      searchAirports();
     }
     console.log(debounce);
   }, [debounce]);
