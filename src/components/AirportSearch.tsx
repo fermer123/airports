@@ -1,13 +1,16 @@
 import { useInput } from '../hooks/Input';
 import { useEffect } from 'react';
+import useDebounce from '../hooks/debounce';
 
 const AirportSearch = () => {
   const input = useInput('');
+  const debounce = useDebounce(input.value);
 
   useEffect(() => {
-    if (input.value.length > 3) {
+    if (debounce.length > 3) {
     }
-  }, [input.value]);
+    console.log(debounce);
+  }, [debounce]);
 
   return (
     <div className='mb-4 relative'>
@@ -18,7 +21,7 @@ const AirportSearch = () => {
         {...input}
       />
 
-      <div className='absolute shadow-md left-0 right-0 top-[42px] h-[200px] bg-teal-600'></div>
+      {/* <div className='absolute shadow-md left-0 right-0 top-[42px] h-[200px] bg-teal-600'></div> */}
     </div>
   );
 };
