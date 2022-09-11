@@ -1,10 +1,11 @@
 import { useInput } from '../hooks/Input';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useDebounce from '../hooks/debounce';
 import axios from '../axios';
 import { IAirport, IServerResp } from '../models/models';
 
 const AirportSearch = () => {
+  const [serhair, setSearchair] = useState<IAirport[]>([]);
   const input = useInput('');
   const debounce = useDebounce(input.value, 400);
   const searchAirports = async () => {
@@ -14,6 +15,7 @@ const AirportSearch = () => {
         count: 10,
       },
     });
+    setSearchair(resp.data.results);
     console.log('debounce:', resp);
   };
 
@@ -33,7 +35,13 @@ const AirportSearch = () => {
         {...input}
       />
 
-      {/* <div className='absolute shadow-md left-0 right-0 top-[42px] h-[200px] bg-teal-600'></div> */}
+      <ul className='absolute list-none shadow-md left-0 right-0 top-[42px] h-[200px] overflow-y-scroll'>
+        {serhair.map((e) => (
+          <li className='py-2 px-4 mb-2 hover:bg-teal-600' key={e.id}>
+            {e.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
