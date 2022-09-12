@@ -16,11 +16,27 @@ const AirportFilter = () => {
 
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log([e.target.name]);
-    console.log(filter);
   };
 
-  useEffect(() => {}, [filterBtn]);
+  const resetFilter = () => {
+    return filter.type || filter.region || filter.country;
+  };
+
+  useEffect(() => {
+    if (resetFilter()) {
+      setFilterBtn(true);
+    } else {
+      setFilterBtn(false);
+    }
+  }, [filterBtn, filter]);
+
+  const resetfilterBtn = () => {
+    setFilter({
+      type: '',
+      country: '',
+      region: '',
+    });
+  };
 
   if (loading)
     return <p className='text-center text-lg text-teal-600 '>Loading...</p>;
@@ -68,7 +84,11 @@ const AirportFilter = () => {
           ))}
         </select>
       </>
-      {filterBtn && <button className='py-1 px-2 bg-teal-600 '>&times;</button>}
+      {filterBtn && (
+        <button onClick={resetfilterBtn} className='py-1 px-2 bg-teal-600 '>
+          &times;
+        </button>
+      )}
     </div>
   );
 };
