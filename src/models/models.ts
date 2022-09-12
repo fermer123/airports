@@ -18,3 +18,9 @@ export interface IServerResp<T> {
 export type IAirportType = string;
 export type IAirportRegion = string;
 export type IAirporCountry = string;
+
+export interface IFilter {
+  type: IAirportType;
+  region: IAirportRegion;
+  country: IAirporCountry;
+}

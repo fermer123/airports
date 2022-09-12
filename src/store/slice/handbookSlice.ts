@@ -29,8 +29,8 @@ export const HandBookSlice = createSlice({
     fetchSuccess(state, action: PayloadAction<HandBookState>) {
       state.loading = false;
       state.types = action.payload.types;
-      state.types = action.payload.regions;
-      state.types = action.payload.countries;
+      state.regions = action.payload.regions;
+      state.countries = action.payload.countries;
     },
   },
 });

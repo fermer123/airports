@@ -17,13 +17,13 @@ export const fetchHandBooks = () => {
         axios.get<IAirportRegion[]>('handbooks/regions'),
         axios.get<IAirporCountry[]>('handbooks/countries'),
       ]);
-      console.log(resp);
+
       dispatch(
         HandBookSlice.actions.fetchSuccess({
           loading: false,
           types: resp[0].data,
-          countries: resp[1].data,
-          regions: resp[2].data,
+          countries: resp[2].data,
+          regions: resp[1].data,
         }),
       );
     } catch (e) {}
