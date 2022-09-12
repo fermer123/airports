@@ -14,3 +14,7 @@ export interface IServerResp<T> {
   previous: number;
   results: T[];
 }
+
+export type IAirportType = string;
+export type IAirportRegion = string;
+export type IAirporCountry = string;
