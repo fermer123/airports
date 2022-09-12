@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react';
 import useDebounce from '../hooks/debounce';
 import axios from '../axios';
 import { IAirport, IServerResp } from '../models/models';
+import { useNavigate } from 'react-router-dom';
 
 const AirportSearch = () => {
+  const push = useNavigate();
   const [serhair, setSearchair] = useState<IAirport[]>([]);
+  const [dropdown, setDropdown] = useState<boolean>(false);
   const input = useInput('');
   const debounce = useDebounce(input.value, 400);
   const searchAirports = async () => {
@@ -21,7 +24,9 @@ const AirportSearch = () => {
 
   useEffect(() => {
     if (debounce.length > 3) {
-      searchAirports();
+      searchAirports().then(() => setDropdown(true));
+    } else {
+      setDropdown(false);
     }
     console.log(debounce);
   }, [debounce]);
@@ -34,14 +39,19 @@ const AirportSearch = () => {
         placeholder='Search...'
         {...input}
       />
-
-      <ul className='absolute list-none shadow-md left-0 right-0 top-[42px] h-[200px] overflow-y-scroll'>
-        {serhair.map((e) => (
-          <li className='py-2 px-4 mb-2 hover:bg-teal-600' key={e.id}>
-            {e.name}
-          </li>
-        ))}
-      </ul>
+      {dropdown && (
+        <ul className='absolute top-[42px] right-0 left-0 bg-white border overflow-y-scroll shadow-md'>
+          {serhair.map((e) => (
+            <li
+              onClick={() => push(`/airport/${e.id}`)}
+              className='py-2 px-4 mb-2 hover:bg-teal-600'
+              key={e.id}
+            >
+              {e.name}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
