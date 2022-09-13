@@ -9,7 +9,6 @@ const AirportDetail = () => {
   const [loading, setLoading] = useState(true);
   const fetchDetailAirport = async () => {
     const resp = await axios.get<IAirportDetail>(`airports/${id}`);
-    console.log(resp.data);
     setAirport(resp.data);
     setLoading(false);
   };
