@@ -9,7 +9,7 @@ const AirportDetail = () => {
   const [loading, setLoading] = useState(true);
   const fetchDetailAirport = async () => {
     const resp = await axios.get<IAirportDetail>(`airports/${id}`);
-    console.log(resp);
+    console.log(resp.data);
     setAirport(resp.data);
     setLoading(false);
   };
@@ -23,7 +23,15 @@ const AirportDetail = () => {
   }
 
   return (
-    <div className='container mx-auto pt-5 max-w-[760px]'>{airport?.name}</div>
+    <div className='container mx-auto pt-5 max-w-[760px]'>
+      <div className='text-lg font-bold'>
+        {airport?.continent} {airport?.name} {airport?.country}
+      </div>
+      <div>{airport?.coordinates}</div>
+      <div>{airport?.ident}</div>
+      <div>{airport?.municipality}</div>
+      <div>{airport?.type}</div>
+    </div>
   );
 };
 
