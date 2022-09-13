@@ -24,3 +24,18 @@ export interface IFilter {
   region: IAirportRegion;
   country: IAirporCountry;
 }
+
+export interface IAirportDetail {
+  continent?: string | null;
+  coordinates: string;
+  country: string;
+  elevation_ft: string;
+  gps_code?: null | string;
+  iata_code?: null | string;
+  ident: string;
+  local_code?: null | string;
+  municipality: string;
+  name: string;
+  region: string;
+  type: string;
+}
