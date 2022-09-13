@@ -1,11 +1,14 @@
-import { useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { useState, useEffect } from 'react';
 import { IFilter } from '../models/models';
+import { AirportSlice } from '../store/slice/AirportSlice';
 
 const AirportFilter = () => {
   const { countries, loading, regions, types } = useAppSelector(
     (state) => state.handBook,
   );
+
+  const dispatch = useAppDispatch();
   const [filterBtn, setFilterBtn] = useState(false);
 
   const [filter, setFilter] = useState<IFilter>({
@@ -28,6 +31,7 @@ const AirportFilter = () => {
     } else {
       setFilterBtn(false);
     }
+    dispatch(AirportSlice.actions.filter(filter));
   }, [filterBtn, filter]);
 
   const resetfilterBtn = () => {

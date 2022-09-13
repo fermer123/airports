@@ -40,20 +40,22 @@ const MainPage = () => {
         <AirportCard key={e.id} airport={e} />
       ))}
 
-      <ReactPaginate
-        breakLabel='...'
-        nextLabel='>'
-        onPageChange={pageChangeHandler}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        forcePage={page.current - 1}
-        previousLabel='<'
-        containerClassName='flex justify-center mb-2 '
-        pageClassName='py-1 px-2 border mr-2'
-        previousClassName='py-1 px-2 border mr-2'
-        nextClassName='py-1 px-2 border'
-        activeClassName='text-teal-600'
-      />
+      {pageCount && (
+        <ReactPaginate
+          breakLabel='...'
+          nextLabel='>'
+          onPageChange={pageChangeHandler}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          forcePage={page.current - 1}
+          previousLabel='<'
+          containerClassName='flex justify-center mb-2 '
+          pageClassName='py-1 px-2 border mr-2'
+          previousClassName='py-1 px-2 border mr-2'
+          nextClassName='py-1 px-2 border'
+          activeClassName='text-teal-600'
+        />
+      )}
     </div>
   );
 };

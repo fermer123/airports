@@ -19,7 +19,6 @@ const AirportSearch = () => {
       },
     });
     setSearchair(resp.data.results);
-    console.log('debounce:', resp);
   };
 
   useEffect(() => {
@@ -28,7 +27,6 @@ const AirportSearch = () => {
     } else {
       setDropdown(false);
     }
-    console.log(debounce);
   }, [debounce]);
 
   return (
