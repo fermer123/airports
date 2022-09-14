@@ -1,16 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import { useInput } from '../hooks/Input';
 import { useAppDispatch } from '../hooks/redux';
 import { register } from '../store/actions/authAction';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
-
+  const push = useNavigate();
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (username.value && password.value) {
       dispatch(
         register({ username: username.value, password: password.value }),
-      );
+      ).then(() => {
+        push('/');
+      });
     } else {
       return;
     }

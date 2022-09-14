@@ -1,5 +1,7 @@
-import { IFilter } from '../../models/models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+const ACCESS_KEY = 'access';
+const USERNAME_KEY = 'username';
 
 interface AuthState {
   access: string;
@@ -8,9 +10,9 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  access: '',
-  username: '',
-  isAuth: false,
+  access: localStorage.getItem(ACCESS_KEY) ?? '',
+  username: localStorage.getItem(USERNAME_KEY) ?? '',
+  isAuth: Boolean(localStorage.getItem(ACCESS_KEY)) ?? false,
 };
 
 interface AuthPayload {
@@ -26,6 +28,18 @@ export const AuthSlice = createSlice({
       state.access = action.payload.access;
       state.username = action.payload.username;
       state.isAuth = Boolean(action.payload.access);
+      localStorage.setItem(ACCESS_KEY, JSON.stringify(action.payload.access));
+      localStorage.setItem(
+        USERNAME_KEY,
+        JSON.stringify(action.payload.username),
+      );
+    },
+    logout(state) {
+      state.access = '';
+      state.username = '';
+      state.isAuth = false;
+      localStorage.removeItem(ACCESS_KEY);
+      localStorage.removeItem(USERNAME_KEY);
     },
   },
 });
