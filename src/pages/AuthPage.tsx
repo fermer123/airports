@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useInput } from '../hooks/Input';
 import { useAppDispatch } from '../hooks/redux';
-import { register } from '../store/actions/authAction';
+import { login, register } from '../store/actions/authAction';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +21,18 @@ const AuthPage = () => {
 
   const username = useInput();
   const password = useInput();
+
+  const loginHandler = () => {
+    if (username.value && password.value) {
+      dispatch(
+        login({ username: username.value, password: password.value }),
+      ).then(() => {
+        push('/');
+      });
+    } else {
+      return;
+    }
+  };
 
   return (
     <form
@@ -54,6 +66,13 @@ const AuthPage = () => {
 
       <button className='py-2 px-4 bg-teal-600 border' type='submit'>
         Register
+      </button>
+      <button
+        onClick={loginHandler}
+        className='py-2 px-4 bg-teal-600 border'
+        type='button'
+      >
+        Login
       </button>
     </form>
   );
