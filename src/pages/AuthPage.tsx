@@ -11,6 +11,8 @@ const AuthPage = () => {
       dispatch(
         register({ username: username.value, password: password.value }),
       );
+    } else {
+      return;
     }
   };
 
@@ -29,7 +31,7 @@ const AuthPage = () => {
         <input
           type='text'
           {...username}
-          value={11}
+          value={username.value}
           id='username'
           className='border py-1 px-2 w-full text-center'
         />
@@ -41,11 +43,15 @@ const AuthPage = () => {
         <input
           type='password'
           {...password}
-          value={''}
+          value={password.value}
           id='username'
-          className='border py-1 px-2 w-full text-center'
+          className='border py-1 px-2 w-full text-center mb-2'
         />
       </div>
+
+      <button className='py-2 px-4 bg-teal-600 border' type='submit'>
+        Register
+      </button>
     </form>
   );
 };
