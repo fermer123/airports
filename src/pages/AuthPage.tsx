@@ -7,15 +7,19 @@ const AuthPage = () => {
   const dispatch = useAppDispatch();
   const push = useNavigate();
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (username.value && password.value) {
-      dispatch(
-        register({ username: username.value, password: password.value }),
-      ).then(() => {
-        push('/');
-      });
-    } else {
-      return;
+    try {
+      e.preventDefault();
+      if (username.value && password.value) {
+        dispatch(
+          register({ username: username.value, password: password.value }),
+        ).then(() => {
+          push('/');
+        });
+      } else {
+        return;
+      }
+    } catch (error) {
+      console.log(e);
     }
   };
 
@@ -23,14 +27,18 @@ const AuthPage = () => {
   const password = useInput();
 
   const loginHandler = () => {
-    if (username.value && password.value) {
-      dispatch(
-        login({ username: username.value, password: password.value }),
-      ).then(() => {
-        push('/');
-      });
-    } else {
-      return;
+    try {
+      if (username.value && password.value) {
+        dispatch(
+          login({ username: username.value, password: password.value }),
+        ).then(() => {
+          push('/');
+        });
+      } else {
+        return;
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -64,16 +72,18 @@ const AuthPage = () => {
         />
       </div>
 
-      <button className='py-2 px-4 bg-teal-600 border' type='submit'>
-        Register
-      </button>
-      <button
-        onClick={loginHandler}
-        className='py-2 px-4 bg-teal-600 border'
-        type='button'
-      >
-        Login
-      </button>
+      <div className='text-center'>
+        <button className='py-2 px-4 bg-teal-600 border mr-2' type='submit'>
+          Register
+        </button>
+        <button
+          onClick={loginHandler}
+          className='py-2 px-4 bg-teal-600 border'
+          type='button'
+        >
+          Login
+        </button>
+      </div>
     </form>
   );
 };

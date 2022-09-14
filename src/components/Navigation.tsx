@@ -18,6 +18,7 @@ const Navigation = () => {
       {isAuth ? (
         <div>
           <span>{username}</span>
+          <br />
           <a href='#' onClick={logout}>
             Logout
           </a>

@@ -22,7 +22,9 @@ export const register = (data: IAuthData) => {
           access: resp.data.access,
         }),
       );
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
@@ -37,7 +39,7 @@ export const login = (data: IAuthData) => {
         }),
       );
     } catch (e) {
-      throw new Error(e as Error);
+      console.log(e);
     }
   };
 };
